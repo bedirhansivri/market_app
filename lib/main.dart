@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/sepet.dart';
+import 'package:market_app/urunler.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,6 +29,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget> _icerikler;
+  int _aktifIcerikNo = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _icerikler = [
+      Urunler(),
+      Sepet(),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Text(
           "Uçarak Gelsin",
           style: TextStyle(
@@ -42,7 +57,29 @@ class _HomePageState extends State<HomePage> {
             color: Colors.grey[600],
           ),
         ),
-        centerTitle: true,
+      ),
+      body: _icerikler[_aktifIcerikNo],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _aktifIcerikNo,
+        selectedItemColor: Colors.red[400],
+        unselectedItemColor: Colors.grey[600],
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            // ignore: deprecated_member_use
+            title: Text("Ürünler"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            // ignore: deprecated_member_use
+            title: Text("Sepetim"),
+          ),
+        ],
+        onTap: (int index) {
+          setState(() {
+            _aktifIcerikNo = index;
+          });
+        },
       ),
     );
   }
