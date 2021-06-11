@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/kategori.dart';
 
 class Urunler extends StatefulWidget {
   Urunler({Key key}) : super(key: key);
@@ -25,21 +26,38 @@ class _UrunlerState extends State<Urunler> with SingleTickerProviderStateMixin {
           labelColor: Colors.red[400],
           unselectedLabelColor: Colors.grey,
           isScrollable: true,
+          labelStyle: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
           tabs: [
-            Tab(child: Text("Birinci Kanal")),
-            Tab(child: Text("İkinci Kanal")),
-            Tab(child: Text("Üçüncü Kanal")),
-            Tab(child: Text("Dördüncü Kanal")),
+            Tab(
+              child: Text("Temel Gıda"),
+            ),
+            Tab(
+              child: Text("Şekerleme"),
+            ),
+            Tab(
+              child: Text("İçecekler"),
+            ),
+            Tab(
+              child: Text("Temizlik"),
+            ),
           ],
         ),
         Expanded(
           child: TabBarView(
             controller: tabController,
             children: [
-              Urunler(),
-              Urunler(),
-              Urunler(),
-              Urunler(),
+              Kategori(
+                kategori: "Temel Gıda",
+              ),
+              Kategori(
+                kategori: "Şekerleme",
+              ),
+              Kategori(
+                kategori: "İçecekler",
+              ),
+              Kategori(
+                kategori: "Temizlik",
+              ),
             ],
           ),
         ),
